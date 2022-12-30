@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component
 @Component
 class ReadingList {
 
-    private val books = mutableListOf<Book>()
+    private val books = mutableSetOf<Book>()
     fun add(book: Book) {
         books.add(book)
     }

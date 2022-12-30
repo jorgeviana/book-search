@@ -24,4 +24,14 @@ class ReadingListTest {
             CHARLES_WAVES_BOOK,
         )
     }
+
+    @Test
+    fun `should not add duplicate books to the reading list`() {
+        readingList.add(THE_WAVES)
+        readingList.add(THE_WAVES)
+
+        assertThat(readingList.get()).containsExactly(
+            THE_WAVES,
+        )
+    }
 }
