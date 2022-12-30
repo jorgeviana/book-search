@@ -1,11 +1,13 @@
 package com.example.booksearch
 
 class ReadingList {
+
+    private val books = mutableListOf<Book>()
     fun add(book: Book) {
-        TODO()
+        books.add(book)
     }
 
     fun get(): List<Book> {
-        TODO()
+        return books.toList()
     }
 }
