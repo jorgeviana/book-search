@@ -51,4 +51,11 @@ class CommandsValidationTest {
 
         verify(readingList).add(MOBY_DICK)
     }
+
+    @Test
+    fun `add command should receive a number greater or equal to 1`() {
+        commands.accept("add: 0")
+
+        testConsole.verifyContains("- add command is malformed. Number of the book should be greater or equal to 1")
+    }
 }

@@ -27,8 +27,12 @@ class Commands(
                     console.printLine("- add command is malformed. Ex: add: 1")
                     return
                 }
-
                 val index = command.split(":")[1].trim().toInt()
+                if (index < 1) {
+                    console.printLine("- add command is malformed. Number of the book should be greater or equal to 1")
+                    return
+                }
+
                 val book = bookService.lastSearchResult().get(index - 1)
                 readingList.add(book)
             }
