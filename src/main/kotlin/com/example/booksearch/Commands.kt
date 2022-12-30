@@ -1,5 +1,8 @@
 package com.example.booksearch
 
+import org.springframework.stereotype.Component
+
+@Component
 class Commands(val bookService: BookService, val console: Console, val readingList: ReadingList) {
     fun accept(command: String) {
         if (command.startsWith("list")) {

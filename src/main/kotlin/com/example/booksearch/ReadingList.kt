@@ -1,5 +1,8 @@
 package com.example.booksearch
 
+import org.springframework.stereotype.Component
+
+@Component
 class ReadingList {
 
     private val books = mutableListOf<Book>()
