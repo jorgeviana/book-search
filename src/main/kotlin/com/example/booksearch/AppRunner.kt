@@ -13,10 +13,12 @@ class AppRunner(private val commands: Commands) : ApplicationRunner {
 		commands.printHelp()
 
 		val scanner = Scanner(System.`in`)
-		var input = scanner.next()
+		var input = scanner.nextLine()
 		while (input.trim().lowercase() != "exit") {
-			commands.accept(input)
-			input = scanner.next()
+			if (input.trim().isNotEmpty()) {
+				commands.accept(input)
+			}
+			input = scanner.nextLine()
 		}
 	}
 }
