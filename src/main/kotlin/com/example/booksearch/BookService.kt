@@ -9,7 +9,10 @@ class BookService {
     }
 
     fun search(criteria: String): List<Book> {
-        TODO()
+        return books.filter { book ->
+            book.tittle.lowercase().contains(criteria.lowercase())
+                    || book.author.lowercase().contains(criteria.lowercase())
+        }
     }
 
     fun lastSearchResult(): List<Book> {
