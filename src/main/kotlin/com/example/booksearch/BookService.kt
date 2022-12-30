@@ -11,4 +11,8 @@ class BookService {
     fun search(criteria: String): List<Book> {
         TODO()
     }
+
+    fun lastSearchResult(): List<Book> {
+        TODO()
+    }
 }
