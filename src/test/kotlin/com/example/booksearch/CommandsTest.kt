@@ -1,27 +1,17 @@
 package com.example.booksearch
 
+import com.example.booksearch.TestData.Companion.CHARLES_WAVES_BOOK
+import com.example.booksearch.TestData.Companion.THE_WAVES
 import org.junit.jupiter.api.Test
 import org.mockito.kotlin.given
 import org.mockito.kotlin.mock
-import org.mockito.kotlin.verify
 
 class CommandsTest {
-
-    val THE_WAVES = Book(
-        author = "Virginia Woolf",
-        tittle = "The Waves",
-        publishingCompany = "Best Books",
-    )
-
-    val CHARLES_WAVES_BOOK = Book(
-        author = "Charles Waves",
-        tittle = "The Untold Story",
-        publishingCompany = "Other Books",
-    )
 
     val bookService = mock<BookService>()
     val console = mock<Console>()
     val commands = Commands(bookService, console)
+    val testConsole = TestConsole(console)
 
     @Test
     fun `should accept the search command`() {
@@ -30,15 +20,10 @@ class CommandsTest {
 
         commands.accept("search: wave")
 
-        verifyConsole("""
+        testConsole.verify("""
             1: ${THE_WAVES}
             2: ${CHARLES_WAVES_BOOK}
         """)
     }
 
-    fun verifyConsole(text: String) {
-        text.trimIndent().split("\n").forEach {
-                line -> verify(console).printLine(line)
-        }
-    }
 }
