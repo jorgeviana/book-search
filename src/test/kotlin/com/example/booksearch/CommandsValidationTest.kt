@@ -58,4 +58,14 @@ class CommandsValidationTest {
 
         testConsole.verifyContains("- add command is malformed. Number of the book should be greater or equal to 1")
     }
+
+    @Test
+    fun `add command should not receive a number greater than the number of books found`() {
+        given(bookService.lastSearchResult())
+            .willReturn(listOf(MOBY_DICK))
+
+        commands.accept("add: 2")
+
+        testConsole.verifyContains("- add command is malformed. Book number not in search list")
+    }
 }

@@ -32,8 +32,13 @@ class Commands(
                     console.printLine("- add command is malformed. Number of the book should be greater or equal to 1")
                     return
                 }
+                val lastSearchResult = bookService.lastSearchResult()
+                if (index > lastSearchResult.size) {
+                    console.printLine("- add command is malformed. Book number not in search list")
+                    return
+                }
 
-                val book = bookService.lastSearchResult().get(index - 1)
+                val book = lastSearchResult.get(index - 1)
                 readingList.add(book)
             }
             isSearch(command) -> {
