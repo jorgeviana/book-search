@@ -26,7 +26,7 @@ class AcceptanceTest {
 
     val bookService = BookService()
     val console = mock<Console>()
-    val commands = Commands(console)
+    val commands = Commands(bookService, console)
 
     @Test
     fun `should add book to reading list`() {
@@ -54,7 +54,7 @@ class AcceptanceTest {
         """)
     }
 
-    private fun verifyConsole(text: String) {
+    fun verifyConsole(text: String) {
         text.trimIndent().split("\n").forEach {
             line -> verify(console).printLine(line)
         }
