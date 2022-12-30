@@ -9,22 +9,26 @@ class Commands(
     private val readingList: ReadingList,
 ) {
     fun accept(command: String) {
-        if (isList(command)) {
-            val booksList = readingList.get()
-            booksList.forEach { book -> console.printLine("$book") }
-
-        } else if (isAdd(command)) {
-            val index = command.split(":")[1].trim().toInt()
-            val book = bookService.lastSearchResult().get(index - 1)
-            readingList.add(book)
-        } else if (isSearch(command)){
-            val criteria = command.split(":")[1].trim()
-            val books = bookService.search(criteria)
-            books.forEachIndexed { index, book ->
-                console.printLine("${index + 1}: $book")
+        when {
+            isList(command) -> {
+                val booksList = readingList.get()
+                booksList.forEach { book -> console.printLine("$book") }
             }
-        } else {
-            printHelp()
+            isAdd(command) -> {
+                val index = command.split(":")[1].trim().toInt()
+                val book = bookService.lastSearchResult().get(index - 1)
+                readingList.add(book)
+            }
+            isSearch(command) -> {
+                val criteria = command.split(":")[1].trim()
+                val books = bookService.search(criteria)
+                books.forEachIndexed { index, book ->
+                    console.printLine("${index + 1}: $book")
+                }
+            }
+            else -> {
+                printHelp()
+            }
         }
     }
 
