@@ -22,4 +22,41 @@ class BookServiceTest {
             THE_WAVES, CHARLES_WAVES_BOOK
         )
     }
+
+    @Test
+    fun `get last search result`() {
+        // given the following books
+        bookService.add(THE_WAVES)
+        bookService.add(CHARLES_WAVES_BOOK)
+        bookService.add(MOBY_DICK)
+
+        // when I search for wave
+        bookService.search("wave")
+
+        // then the last search result should contain all books with wave
+        val searchResult = bookService.lastSearchResult()
+
+        assertThat(searchResult).containsExactly(
+            THE_WAVES, CHARLES_WAVES_BOOK
+        )
+    }
+
+    @Test
+    fun `get last search result when performing more than one search`() {
+        // given the following books
+        bookService.add(THE_WAVES)
+        bookService.add(CHARLES_WAVES_BOOK)
+        bookService.add(MOBY_DICK)
+
+        // when I search for wave and then search for moby
+        bookService.search("wave")
+        bookService.search("moby")
+
+        // then the last search result should contain all books with moby
+        val searchResult = bookService.lastSearchResult()
+
+        assertThat(searchResult).containsExactly(
+            MOBY_DICK
+        )
+    }
 }
