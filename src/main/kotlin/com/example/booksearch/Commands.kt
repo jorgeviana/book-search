@@ -9,14 +9,15 @@ class Commands(
     private val readingList: ReadingList,
 ) {
     fun accept(command: String) {
-        if (command.startsWith("list")) {
+        if (isList(command)) {
             val booksList = readingList.get()
             booksList.forEach { book -> console.printLine("$book") }
-        } else if (command.startsWith("add")) {
+
+        } else if (isAdd(command)) {
             val index = command.split(":")[1].trim().toInt()
             val book = bookService.lastSearchResult().get(index - 1)
             readingList.add(book)
-        } else if (command.startsWith("search")){
+        } else if (isSearch(command)){
             val criteria = command.split(":")[1].trim()
             val books = bookService.search(criteria)
             books.forEachIndexed { index, book ->
@@ -42,4 +43,10 @@ class Commands(
             
         """.trimIndent())
     }
+
+    private fun isList(command: String) = command.trim().lowercase().equals("list")
+
+    private fun isAdd(command: String) = command.trimStart().lowercase().startsWith("add")
+
+    private fun isSearch(command: String) = command.trimStart().lowercase().startsWith("search")
 }
