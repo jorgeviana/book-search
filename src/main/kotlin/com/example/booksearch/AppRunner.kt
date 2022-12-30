@@ -10,6 +10,8 @@ import java.util.Scanner
 class AppRunner(private val commands: Commands) : ApplicationRunner {
 
 	override fun run(args: ApplicationArguments?) {
+		commands.printHelp()
+
 		val scanner = Scanner(System.`in`)
 		var input = scanner.next()
 		while (input.trim().lowercase() != "exit") {
