@@ -12,7 +12,11 @@ class Commands(
         when {
             isList(command) -> {
                 val booksList = readingList.get()
-                booksList.forEach { book -> console.printLine("$book") }
+                if (booksList.isEmpty()) {
+                    console.printLine("- no books in the reading list")
+                } else {
+                    booksList.forEach { book -> console.printLine("$book") }
+                }
             }
             isAdd(command) -> {
                 val index = command.split(":")[1].trim().toInt()
