@@ -16,15 +16,6 @@ class CommandsTest {
     val commands = Commands(bookService, console, readingList)
 
     @Test
-    fun `unknown commands should print help`() {
-        commands.accept("unknown random command")
-
-        testConsole.verifyContains("""
-            The available commands are: search, add, list, exit
-        """)
-    }
-
-    @Test
     fun `should accept the search command`() {
         given(bookService.search("wave"))
             .willReturn(listOf(THE_WAVES, CHARLES_WAVES_BOOK))
