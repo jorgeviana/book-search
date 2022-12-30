@@ -19,6 +19,15 @@ class Commands(
                 }
             }
             isAdd(command) -> {
+                if (!command.contains(":")) {
+                    console.printLine("- add command is malformed. Ex: add: 1")
+                    return
+                }
+                if (command.split(":")[1].trim().toIntOrNull() == null) {
+                    console.printLine("- add command is malformed. Ex: add: 1")
+                    return
+                }
+
                 val index = command.split(":")[1].trim().toInt()
                 val book = bookService.lastSearchResult().get(index - 1)
                 readingList.add(book)

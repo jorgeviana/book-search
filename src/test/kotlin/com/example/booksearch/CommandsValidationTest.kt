@@ -1,8 +1,10 @@
 package com.example.booksearch
 
+import com.example.booksearch.TestData.Companion.MOBY_DICK
 import org.junit.jupiter.api.Test
 import org.mockito.kotlin.given
 import org.mockito.kotlin.mock
+import org.mockito.kotlin.verify
 
 class CommandsValidationTest {
 
@@ -30,5 +32,23 @@ class CommandsValidationTest {
         testConsole.verify("""
            - no books in the reading list
         """)
+    }
+
+    @Test
+    fun `when add command does not contain a colon and a number an error is printed`() {
+        commands.accept("add one")
+        commands.accept("add:")
+        commands.accept("add: one")
+
+        testConsole.verifyContains(3, "- add command is malformed")
+    }
+    @Test
+    fun `add command should contain a colon and a number`() {
+        given(bookService.lastSearchResult())
+            .willReturn(listOf(MOBY_DICK))
+
+        commands.accept("add: 1")
+
+        verify(readingList).add(MOBY_DICK)
     }
 }
