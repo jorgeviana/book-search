@@ -47,4 +47,16 @@ class CommandsTest {
 
         verify(readingList).add(CHARLES_WAVES_BOOK)
     }
+
+    @Test
+    fun `should print the reading list`() {
+        given(readingList.get())
+            .willReturn(listOf(THE_WAVES))
+
+        commands.accept("list")
+
+        testConsole.verify("""
+            ${THE_WAVES}
+        """)
+    }
 }
