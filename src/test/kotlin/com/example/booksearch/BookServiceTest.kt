@@ -1,5 +1,11 @@
 package com.example.booksearch
 
+import com.example.booksearch.TestData.Companion.BOOK_1
+import com.example.booksearch.TestData.Companion.BOOK_2
+import com.example.booksearch.TestData.Companion.BOOK_3
+import com.example.booksearch.TestData.Companion.BOOK_4
+import com.example.booksearch.TestData.Companion.BOOK_5
+import com.example.booksearch.TestData.Companion.BOOK_6
 import com.example.booksearch.TestData.Companion.CHARLES_WAVES_BOOK
 import com.example.booksearch.TestData.Companion.MOBY_DICK
 import com.example.booksearch.TestData.Companion.THE_WAVES
@@ -58,5 +64,20 @@ class BookServiceTest {
         assertThat(searchResult).containsExactly(
             MOBY_DICK
         )
+    }
+
+    @Test
+    fun `search should return max 5 books`() {
+        bookService.add(BOOK_1)
+        bookService.add(BOOK_2)
+        bookService.add(BOOK_3)
+        bookService.add(BOOK_4)
+        bookService.add(BOOK_5)
+        bookService.add(BOOK_6)
+
+        val searchResult = bookService.search("book")
+
+        assertThat(searchResult).hasSize(5)
+        assertThat(bookService.lastSearchResult()).hasSize(5)
     }
 }

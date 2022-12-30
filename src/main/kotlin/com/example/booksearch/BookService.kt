@@ -2,6 +2,8 @@ package com.example.booksearch
 
 import org.springframework.stereotype.Component
 
+private const val MAX_SEARCH_RESULT = 5L
+
 @Component
 class BookService {
 
@@ -17,6 +19,10 @@ class BookService {
             book.tittle.lowercase().contains(criteria.lowercase())
                     || book.author.lowercase().contains(criteria.lowercase())
         }
+            .stream()
+            .limit(MAX_SEARCH_RESULT)
+            .toList()
+
         updateLastSearchResult(searchResult)
         return searchResult
     }
