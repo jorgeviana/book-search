@@ -8,7 +8,7 @@ import org.mockito.kotlin.mock
 
 class AcceptanceTest {
 
-    val bookService = BookService()
+    val bookService = FakeBookService()
     val console = mock<Console>()
     val testConsole = TestConsole(console)
     val readingList = ReadingList()

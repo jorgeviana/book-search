@@ -12,9 +12,9 @@ import com.example.booksearch.TestData.Companion.THE_WAVES
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
-class BookServiceTest {
+class FakeBookServiceTest {
 
-    val bookService = BookService()
+    val bookService = FakeBookService()
 
     @Test
     fun `search should work on tittle and author`() {

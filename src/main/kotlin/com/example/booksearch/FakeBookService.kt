@@ -10,7 +10,7 @@ interface GoogleBookService {
 }
 
 @Component
-class BookService : GoogleBookService {
+class FakeBookService : GoogleBookService {
 
     private val books = mutableListOf<Book>()
     private var lastSearchResult = mutableListOf<Book>()
