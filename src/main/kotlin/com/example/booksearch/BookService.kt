@@ -51,6 +51,7 @@ class GoogleBookService(restTemplateBuilder: RestTemplateBuilder) : BookService 
 
     private val restTemplate = restTemplateBuilder.build()
     private val resultMapper = ResultMapper()
+    private var lastSearchResult = mutableListOf<Book>()
 
     override fun search(criteria: String): List<Book> {
         val params = mapOf(
@@ -65,14 +66,22 @@ class GoogleBookService(restTemplateBuilder: RestTemplateBuilder) : BookService 
         )
 
         if (result.body == null) {
+            updateLastSearchResult(listOf())
             return listOf()
         }
 
-        return resultMapper.map(result.body!!.books())
+        val books = resultMapper.map(result.body!!.books())
+        updateLastSearchResult(books)
+        return books
     }
 
     override fun lastSearchResult(): List<Book> {
-        TODO()
+        return lastSearchResult.toList()
+    }
+
+    private fun updateLastSearchResult(searchResult: List<Book>) {
+        lastSearchResult = mutableListOf()
+        lastSearchResult.addAll(searchResult)
     }
 
     class ResultMapper {

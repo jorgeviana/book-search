@@ -29,4 +29,14 @@ class GoogleBookServiceIntegrationTest {
 
         assertThat(result.size).isGreaterThan(0)
     }
+
+    @Test
+    fun `get last search result when performing more than one search`() {
+        val waves = googleBookService.search("wave")
+        val mobys = googleBookService.search("moby")
+
+        val lastResult = googleBookService.lastSearchResult()
+
+        assertThat(lastResult).isEqualTo(mobys)
+    }
 }
