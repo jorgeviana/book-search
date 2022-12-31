@@ -8,6 +8,9 @@ class Commands(
     private val console: Console,
     private val readingList: ReadingList,
 ) {
+    /**
+     * TODO this class needs refactoring badly :)
+     */
     fun accept(command: String) {
         when {
             isList(command) -> {
