@@ -1,5 +1,11 @@
 
+# Google Books Reading List
+
+Notes
+
 > Requires Java 17
+> 
+> Uses in-memory volatile "database" to keep the reading list 
 
 ### Run Application
 
