@@ -4,8 +4,13 @@ import org.springframework.stereotype.Component
 
 private const val MAX_SEARCH_RESULT = 5L
 
+interface GoogleBookService {
+    fun search(criteria: String): List<Book>
+    fun lastSearchResult(): List<Book>
+}
+
 @Component
-class BookService {
+class BookService : GoogleBookService {
 
     private val books = mutableListOf<Book>()
     private var lastSearchResult = mutableListOf<Book>()
@@ -14,7 +19,7 @@ class BookService {
         books.add(book)
     }
 
-    fun search(criteria: String): List<Book> {
+    override fun search(criteria: String): List<Book> {
         val searchResult = books.filter { book ->
             book.tittle.lowercase().contains(criteria.lowercase())
                     || book.author.lowercase().contains(criteria.lowercase())
@@ -27,7 +32,7 @@ class BookService {
         return searchResult
     }
 
-    fun lastSearchResult(): List<Book> {
+    override fun lastSearchResult(): List<Book> {
         return lastSearchResult.toList()
     }
 
