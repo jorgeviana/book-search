@@ -53,6 +53,7 @@ class GoogleBookService(restTemplateBuilder: RestTemplateBuilder) : BookService 
     private val resultMapper = ResultMapper()
     private var lastSearchResult = mutableListOf<Book>()
 
+    // TODO implement error handling
     override fun search(criteria: String): List<Book> {
         val params = mapOf(
             "q" to criteria,
