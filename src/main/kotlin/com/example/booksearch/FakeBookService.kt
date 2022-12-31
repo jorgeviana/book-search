@@ -4,13 +4,13 @@ import org.springframework.stereotype.Component
 
 private const val MAX_SEARCH_RESULT = 5L
 
-interface GoogleBookService {
+interface BookService {
     fun search(criteria: String): List<Book>
     fun lastSearchResult(): List<Book>
 }
 
 @Component
-class FakeBookService : GoogleBookService {
+class FakeBookService : BookService {
 
     private val books = mutableListOf<Book>()
     private var lastSearchResult = mutableListOf<Book>()

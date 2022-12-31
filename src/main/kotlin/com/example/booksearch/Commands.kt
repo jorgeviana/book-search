@@ -4,7 +4,7 @@ import org.springframework.stereotype.Component
 
 @Component
 class Commands(
-    private val bookService: GoogleBookService,
+    private val bookService: BookService,
     private val console: Console,
     private val readingList: ReadingList,
 ) {

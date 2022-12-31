@@ -8,7 +8,7 @@ import org.mockito.kotlin.verify
 
 class CommandsValidationTest {
 
-    val bookService = mock<GoogleBookService>()
+    val bookService = mock<BookService>()
     val console = mock<Console>()
     val testConsole = TestConsole(console)
     val readingList = mock<ReadingList>()
