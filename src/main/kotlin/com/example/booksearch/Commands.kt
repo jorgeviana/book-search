@@ -14,12 +14,8 @@ class Commands(
     fun accept(command: String) {
         when {
             isList(command) -> {
-                val booksList = readingList.get()
-                if (booksList.isEmpty()) {
-                    console.printLine("- no books in the reading list")
-                } else {
-                    booksList.forEach { book -> console.printLine("$book") }
-                }
+                val executor = ListCommandExecutor(readingList, console)
+                executor.execute(command)
             }
             isAdd(command) -> {
                 val validator = AddCommandValidator(console)
