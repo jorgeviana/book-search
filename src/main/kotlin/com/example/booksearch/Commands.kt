@@ -22,27 +22,12 @@ class Commands(
                 }
             }
             isAdd(command) -> {
-                if (!command.contains(":")) {
-                    console.printLine("- add command is malformed. Ex: add: 1")
+                val validator = AddCommandValidator(console)
+                if (validator.isNotValid(command)) {
                     return
                 }
-                if (command.split(":")[1].trim().toIntOrNull() == null) {
-                    console.printLine("- add command is malformed. Ex: add: 1")
-                    return
-                }
-                val index = command.split(":")[1].trim().toInt()
-                if (index < 1) {
-                    console.printLine("- add command is malformed. Number of the book should be greater or equal to 1")
-                    return
-                }
-                val lastSearchResult = bookService.lastSearchResult()
-                if (index > lastSearchResult.size) {
-                    console.printLine("- add command is malformed. Book number not in search list")
-                    return
-                }
-
-                val book = lastSearchResult.get(index - 1)
-                readingList.add(book)
+                val executor = AddCommandExecutor(bookService, console, readingList)
+                executor.execute(command)
             }
             isSearch(command) -> {
                 val criteria = command.split(":")[1].trim()
