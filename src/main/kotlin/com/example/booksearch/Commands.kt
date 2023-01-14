@@ -30,11 +30,13 @@ class Commands(
                 executor.execute(command)
             }
             isSearch(command) -> {
-                val criteria = command.split(":")[1].trim()
-                val books = bookService.search(criteria)
-                books.forEachIndexed { index, book ->
-                    console.printLine("${index + 1}: $book")
+                val validator = SearchCommandValidator(console)
+                if (validator.isNotValid(command)) {
+                    return
                 }
+
+                val executor = SearchCommandExecutor(bookService, console)
+                executor.execute(command)
             }
             else -> {
                 printHelp()

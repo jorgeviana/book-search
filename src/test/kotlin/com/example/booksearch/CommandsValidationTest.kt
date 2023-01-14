@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test
 import org.mockito.kotlin.given
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.verify
+import org.mockito.kotlin.verifyNoInteractions
 
 class CommandsValidationTest {
 
@@ -67,5 +68,21 @@ class CommandsValidationTest {
         commands.accept("add: 2")
 
         testConsole.verifyContains("- add command is malformed. Book number not in search list")
+    }
+
+    @Test
+    fun `search command must contain a colon`() {
+        commands.accept(" search ")
+
+        testConsole.verifyContains("- invalid search command")
+        verifyNoInteractions(bookService)
+    }
+
+    @Test
+    fun `search command must contain a criteria`() {
+        commands.accept(" search : ")
+
+        testConsole.verifyContains("- invalid search command")
+        verifyNoInteractions(bookService)
     }
 }
