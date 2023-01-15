@@ -26,8 +26,15 @@ class AcceptanceTest {
 
         // then it's printed on the console the matching books
         testConsole.verify("""
-            1: ${THE_WAVES}
-            2: ${CHARLES_WAVES_BOOK}
+            Book #1
+            Tittle: ${THE_WAVES.tittle}
+            Author: ${THE_WAVES.author}
+            Publisher: ${THE_WAVES.publishingCompany}
+            
+            Book #2
+            Tittle: ${CHARLES_WAVES_BOOK.tittle}
+            Author: ${CHARLES_WAVES_BOOK.author}
+            Publisher: ${CHARLES_WAVES_BOOK.publishingCompany}
         """)
 
         // and when I choose to add the 1st book to the reading list

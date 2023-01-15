@@ -37,8 +37,15 @@ class CommandsTest {
         commands.accept("search: wave")
 
         testConsole.verify("""
-            1: ${THE_WAVES}
-            2: ${CHARLES_WAVES_BOOK}
+            Book #1
+            Tittle: ${THE_WAVES.tittle}
+            Author: ${THE_WAVES.author}
+            Publisher: ${THE_WAVES.publishingCompany}
+            
+            Book #2
+            Tittle: ${CHARLES_WAVES_BOOK.tittle}
+            Author: ${CHARLES_WAVES_BOOK.author}
+            Publisher: ${CHARLES_WAVES_BOOK.publishingCompany}
         """)
     }
 

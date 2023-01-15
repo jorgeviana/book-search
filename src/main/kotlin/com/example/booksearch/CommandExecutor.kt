@@ -12,7 +12,13 @@ class SearchCommandExecutor(
         val criteria = command.split(":")[1].trim()
         val books = bookService.search(criteria)
         books.forEachIndexed { index, book ->
-            console.printLine("${index + 1}: $book")
+            if (index > 0) {
+                console.printLine("")
+            }
+            console.printLine("Book #${index + 1}")
+            console.printLine("Tittle: ${book.tittle}")
+            console.printLine("Author: ${book.author}")
+            console.printLine("Publisher: ${book.publishingCompany}")
         }
     }
 }
