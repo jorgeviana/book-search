@@ -6,20 +6,12 @@ interface CommandExecutor {
 
 class SearchCommandExecutor(
     private val bookService: BookService,
-    private val console: Console,
+    private val booksPresenter: BooksPresenter,
     private val criteria: String,
 ) : CommandExecutor {
     override fun execute() {
         val books = bookService.search(criteria)
-        books.forEachIndexed { index, book ->
-            if (index > 0) {
-                console.printLine("")
-            }
-            console.printLine("Book #${index + 1}")
-            console.printLine("Tittle: ${book.tittle}")
-            console.printLine("Author: ${book.author}")
-            console.printLine("Publisher: ${book.publishingCompany}")
-        }
+        booksPresenter.present(books)
     }
 }
 
@@ -48,22 +40,14 @@ class AddCommandExecutor(
 class ListCommandExecutor(
     private val readingList: ReadingList,
     private val console: Console,
+    private val booksPresenter: BooksPresenter,
 ) : CommandExecutor {
     override fun execute() {
         val booksList = readingList.get()
         if (booksList.isEmpty()) {
             console.printLine("- no books in the reading list")
-        } else {
-            console.printLine("The reading list is:")
-            booksList.forEachIndexed { index, book ->
-                if (index > 0) {
-                    console.printLine("")
-                }
-                console.printLine("Book #${index + 1}")
-                console.printLine("Tittle: ${book.tittle}")
-                console.printLine("Author: ${book.author}")
-                console.printLine("Publisher: ${book.publishingCompany}")
-            }
+            return
         }
+        booksPresenter.present("The reading list is:", booksList)
     }
 }
