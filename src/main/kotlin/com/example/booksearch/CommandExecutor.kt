@@ -7,10 +7,9 @@ interface CommandExecutor {
 class SearchCommandExecutor(
     private val bookService: BookService,
     private val console: Console,
-    private val command: String,
+    private val criteria: String,
 ) : CommandExecutor {
     override fun execute() {
-        val criteria = command.split(":")[1].trim()
         val books = bookService.search(criteria)
         books.forEachIndexed { index, book ->
             if (index > 0) {
@@ -28,10 +27,9 @@ class AddCommandExecutor(
     private val bookService: BookService,
     private val console: Console,
     private val readingList: ReadingList,
-    private val command: String,
+    private val index: Int,
 ) : CommandExecutor {
     override fun execute() {
-        val index = command.split(":")[1].trim().toInt()
         if (index < 1) {
             console.printLine("- add command is malformed. Number of the book should be greater or equal to 1")
             return

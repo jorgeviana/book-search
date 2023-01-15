@@ -26,7 +26,9 @@ class Commands(
                 if (validator.isNotValid(command)) {
                     return AppState.CONTINUE
                 }
-                val executor = AddCommandExecutor(bookService, console, readingList, command)
+
+                val index = command.split(":")[1].trim().toInt()
+                val executor = AddCommandExecutor(bookService, console, readingList, index)
                 executor.execute()
             }
             isSearch(command) -> {
@@ -35,7 +37,8 @@ class Commands(
                     return AppState.CONTINUE
                 }
 
-                val executor = SearchCommandExecutor(bookService, console, command)
+                val criteria = command.split(":")[1].trim()
+                val executor = SearchCommandExecutor(bookService, console, criteria)
                 executor.execute()
             }
             else -> {
