@@ -1,14 +1,16 @@
-package com.example.booksearch
+package slow.tests
 
-import com.example.booksearch.SmokeTest.Companion.restoreInputStream
-import com.example.booksearch.SmokeTest.Companion.simulatesUserTyping
+import com.example.booksearch.AppRunner
+import com.example.booksearch.BookService
+import slow.tests.SmokeTest.Companion.restoreInputStream
+import slow.tests.SmokeTest.Companion.simulatesUserTyping
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 
-@SpringBootTest
+@SpringBootTest(classes = [AppRunner::class])
 class GoogleBookServiceIntegrationTest {
 
     init {

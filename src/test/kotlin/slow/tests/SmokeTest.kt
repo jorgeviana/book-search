@@ -1,5 +1,6 @@
-package com.example.booksearch
+package slow.tests
 
+import com.example.booksearch.AppRunner
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Test
@@ -8,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import java.io.ByteArrayInputStream
 
-@SpringBootTest
+@SpringBootTest(classes = [AppRunner::class])
 class SmokeTest {
 
     init {
