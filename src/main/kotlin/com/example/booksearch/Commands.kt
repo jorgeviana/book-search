@@ -22,7 +22,7 @@ class Commands(
                 executor.execute(command)
             }
             isAdd(command) -> {
-                val validator = AddCommandValidator(console)
+                val validator: CommandValidator = AddCommandValidator(console)
                 if (validator.isNotValid(command)) {
                     return AppState.CONTINUE
                 }
@@ -30,7 +30,7 @@ class Commands(
                 executor.execute(command)
             }
             isSearch(command) -> {
-                val validator = SearchCommandValidator(console)
+                val validator: CommandValidator = SearchCommandValidator(console)
                 if (validator.isNotValid(command)) {
                     return AppState.CONTINUE
                 }
