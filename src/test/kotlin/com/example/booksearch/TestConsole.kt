@@ -1,13 +1,17 @@
 package com.example.booksearch
 
 import org.mockito.ArgumentMatchers.contains
+import org.mockito.Mockito
 import org.mockito.kotlin.times
 import org.mockito.kotlin.verify
 
 class TestConsole(private val console: Console) {
+
+    val inOrder = Mockito.inOrder(console)
+
     fun verify(text: String) {
         text.trimIndent().split("\n").forEach {
-                line -> verify(console).printLine(line)
+                line -> inOrder.verify(console).printLine(line)
         }
     }
 

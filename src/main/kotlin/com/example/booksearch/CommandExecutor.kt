@@ -54,7 +54,16 @@ class ListCommandExecutor(
         if (booksList.isEmpty()) {
             console.printLine("- no books in the reading list")
         } else {
-            booksList.forEach { book -> console.printLine("$book") }
+            console.printLine("The reading list is:")
+            booksList.forEachIndexed { index, book ->
+                if (index > 0) {
+                    console.printLine("")
+                }
+                console.printLine("Book #${index + 1}")
+                console.printLine("Tittle: ${book.tittle}")
+                console.printLine("Author: ${book.author}")
+                console.printLine("Publisher: ${book.publishingCompany}")
+            }
         }
     }
 }

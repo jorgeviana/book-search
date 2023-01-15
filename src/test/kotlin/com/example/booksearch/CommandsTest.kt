@@ -77,7 +77,11 @@ class CommandsTest {
         commands.accept("list")
 
         testConsole.verify("""
-            ${THE_WAVES}
+            The reading list is:
+            Book #1
+            Tittle: ${THE_WAVES.tittle}
+            Author: ${THE_WAVES.author}
+            Publisher: ${THE_WAVES.publishingCompany}
         """)
     }
 }
