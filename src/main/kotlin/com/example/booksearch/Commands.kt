@@ -8,8 +8,15 @@ class Commands(
     private val console: Console,
     private val readingList: ReadingList,
 ) {
-    fun accept(command: String) {
+
+    fun accept(command: String): AppState {
         when {
+            isEmpty(command) -> {
+                return AppState.CONTINUE
+            }
+            isExitCommand(command) -> {
+                return AppState.EXIT
+            }
             isList(command) -> {
                 val executor = ListCommandExecutor(readingList, console)
                 executor.execute(command)
@@ -17,7 +24,7 @@ class Commands(
             isAdd(command) -> {
                 val validator = AddCommandValidator(console)
                 if (validator.isNotValid(command)) {
-                    return
+                    return AppState.CONTINUE
                 }
                 val executor = AddCommandExecutor(bookService, console, readingList)
                 executor.execute(command)
@@ -25,7 +32,7 @@ class Commands(
             isSearch(command) -> {
                 val validator = SearchCommandValidator(console)
                 if (validator.isNotValid(command)) {
-                    return
+                    return AppState.CONTINUE
                 }
 
                 val executor = SearchCommandExecutor(bookService, console)
@@ -35,6 +42,7 @@ class Commands(
                 printHelp()
             }
         }
+        return AppState.CONTINUE
     }
 
     fun printHelp() {
@@ -58,4 +66,8 @@ class Commands(
     private fun isAdd(command: String) = command.trimStart().lowercase().startsWith("add")
 
     private fun isSearch(command: String) = command.trimStart().lowercase().startsWith("search")
+
+    private fun isExitCommand(command: String) = command.trim().lowercase() == "exit"
+
+    private fun isEmpty(command: String) = command.trim().isEmpty()
 }
