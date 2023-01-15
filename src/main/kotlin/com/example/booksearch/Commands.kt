@@ -19,15 +19,15 @@ class Commands(
             }
             isList(command) -> {
                 val executor = ListCommandExecutor(readingList, console)
-                executor.execute(command)
+                executor.execute()
             }
             isAdd(command) -> {
                 val validator: CommandValidator = AddCommandValidator(console)
                 if (validator.isNotValid(command)) {
                     return AppState.CONTINUE
                 }
-                val executor = AddCommandExecutor(bookService, console, readingList)
-                executor.execute(command)
+                val executor = AddCommandExecutor(bookService, console, readingList, command)
+                executor.execute()
             }
             isSearch(command) -> {
                 val validator: CommandValidator = SearchCommandValidator(console)
@@ -35,8 +35,8 @@ class Commands(
                     return AppState.CONTINUE
                 }
 
-                val executor = SearchCommandExecutor(bookService, console)
-                executor.execute(command)
+                val executor = SearchCommandExecutor(bookService, console, command)
+                executor.execute()
             }
             else -> {
                 printHelp()
