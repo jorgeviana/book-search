@@ -21,27 +21,3 @@ abstract class BooksPresenter(private val console: Console) {
         console.printLine(message)
     }
 }
-
-class SearchBooksPresenter(private val console: Console) : BooksPresenter(console) {
-
-    override fun present(books: List<Book>) {
-        defaultPresentation(books)
-    }
-}
-
-class ReadingListPresenter(private val console: Console) : BooksPresenter(console) {
-
-    override fun present(books: List<Book>) {
-        if (books.isEmpty()) {
-            console.printLine("- no books in the reading list")
-            return
-        }
-        console.printLine("The reading list is:")
-        defaultPresentation(books)
-    }
-}
-
-class AddPresenter(console: Console) : BooksPresenter(console) {
-    override fun present(books: List<Book>) {
-    }
-}
