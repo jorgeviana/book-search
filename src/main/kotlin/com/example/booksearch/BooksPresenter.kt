@@ -38,3 +38,8 @@ class ReadingListPresenter(private val console: Console) : BooksPresenter(consol
         defaultPresentation(books)
     }
 }
+
+class AddPresenter(console: Console) : BooksPresenter(console) {
+    override fun present(books: List<Book>) {
+    }
+}

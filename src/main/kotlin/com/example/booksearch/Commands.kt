@@ -24,7 +24,7 @@ class Commands(
             isAdd(command) -> {
                 val indexSupplier = indexSupplier(command)
 
-                val validator: CommandValidator = AddCommandValidator(console, bookService, indexSupplier)
+                val validator: CommandValidator = AddCommandValidator(AddPresenter(console), bookService, indexSupplier)
                 if (validator.isNotValid(command)) {
                     return AppState.CONTINUE
                 }
