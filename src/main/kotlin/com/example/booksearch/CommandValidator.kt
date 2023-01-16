@@ -4,16 +4,15 @@ interface CommandValidator {
     fun isNotValid(command: String): Boolean
 }
 
-class SearchCommandValidator(private val console: Console) : CommandValidator {
+class SearchCommandValidator(private val presenter: BooksPresenter) : CommandValidator {
     override fun isNotValid(command: String): Boolean {
-        // TODO are we mixing presentation?
         if (!command.contains(":")) {
-            console.printLine("- invalid search command")
+            presenter.presentError("- invalid search command")
             return true
         }
         val criteria = command.split(":")[1].trim()
         if (criteria.isEmpty()) {
-            console.printLine("- invalid search command")
+            presenter.presentError("- invalid search command")
             return true
         }
         return false

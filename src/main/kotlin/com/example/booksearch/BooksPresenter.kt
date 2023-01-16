@@ -14,6 +14,10 @@ abstract class BooksPresenter(private val console: Console) {
             console.printLine("Publisher: ${book.publishingCompany}")
         }
     }
+
+    fun presentError(message: String) {
+        console.printLine(message)
+    }
 }
 
 class SearchBooksPresenter(private val console: Console) : BooksPresenter(console) {

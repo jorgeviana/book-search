@@ -33,13 +33,14 @@ class Commands(
                 executor.execute()
             }
             isSearch(command) -> {
-                val validator: CommandValidator = SearchCommandValidator(console)
+                val presenter = SearchBooksPresenter(console)
+                val validator: CommandValidator = SearchCommandValidator(presenter)
                 if (validator.isNotValid(command)) {
                     return AppState.CONTINUE
                 }
 
                 val criteriaSupplier  = criteriaSupplier(command)
-                val executor = SearchCommandExecutor(bookService, SearchBooksPresenter(console), criteriaSupplier)
+                val executor = SearchCommandExecutor(bookService, presenter, criteriaSupplier)
                 executor.execute()
             }
             else -> {
