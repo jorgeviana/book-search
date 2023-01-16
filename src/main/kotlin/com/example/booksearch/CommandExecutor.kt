@@ -6,12 +6,12 @@ interface CommandExecutor {
 
 class SearchCommandExecutor(
     private val bookService: BookService,
-    private val booksPresenter: BooksPresenter,
+    private val searchBooksPresenter: BooksPresenter,
     private val criteria: String,
 ) : CommandExecutor {
     override fun execute() {
         val books = bookService.search(criteria)
-        booksPresenter.present(books)
+        searchBooksPresenter.present(books)
     }
 }
 
@@ -39,15 +39,10 @@ class AddCommandExecutor(
 
 class ListCommandExecutor(
     private val readingList: ReadingList,
-    private val console: Console,
-    private val booksPresenter: BooksPresenter,
+    private val readingListPresenter: BooksPresenter,
 ) : CommandExecutor {
     override fun execute() {
         val booksList = readingList.get()
-        if (booksList.isEmpty()) {
-            console.printLine("- no books in the reading list")
-            return
-        }
-        booksPresenter.present("The reading list is:", booksList)
+        readingListPresenter.present(booksList)
     }
 }

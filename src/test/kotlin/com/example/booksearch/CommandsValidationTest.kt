@@ -13,8 +13,7 @@ class CommandsValidationTest {
     val console = mock<Console>()
     val testConsole = TestConsole(console)
     val readingList = mock<ReadingList>()
-    val booksPresenter = BooksPresenter(console)
-    val commands = Commands(bookService, console, booksPresenter, readingList)
+    val commands = Commands(bookService, console, readingList)
 
     @Test
     fun `unknown commands should print help`() {

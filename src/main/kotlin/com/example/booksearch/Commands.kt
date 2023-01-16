@@ -6,7 +6,6 @@ import org.springframework.stereotype.Component
 class Commands(
     private val bookService: BookService,
     private val console: Console,
-    private val booksPresenter: BooksPresenter,
     private val readingList: ReadingList,
 ) {
 
@@ -19,7 +18,7 @@ class Commands(
                 return AppState.EXIT
             }
             isList(command) -> {
-                val executor = ListCommandExecutor(readingList, console, booksPresenter)
+                val executor = ListCommandExecutor(readingList, ReadingListPresenter(console))
                 executor.execute()
             }
             isAdd(command) -> {
@@ -39,7 +38,7 @@ class Commands(
                 }
 
                 val criteria = command.split(":")[1].trim()
-                val executor = SearchCommandExecutor(bookService, booksPresenter, criteria)
+                val executor = SearchCommandExecutor(bookService, SearchBooksPresenter(console), criteria)
                 executor.execute()
             }
             else -> {
