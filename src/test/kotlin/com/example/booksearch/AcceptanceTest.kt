@@ -12,7 +12,8 @@ class AcceptanceTest {
     val console = mock<Console>()
     val testConsole = TestConsole(console)
     val readingList = ReadingList()
-    val commands = Commands(bookService, console, readingList)
+    val commandsFactory = CommandsFactory(bookService, readingList, console)
+    val commands = Commands(console, commandsFactory)
 
     @Test
     fun `should add book to reading list`() {

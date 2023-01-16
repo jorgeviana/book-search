@@ -14,7 +14,8 @@ class CommandsTest {
     val console = mock<Console>()
     val testConsole = TestConsole(console)
     val readingList = mock<ReadingList>()
-    val commands = Commands(bookService, console, readingList)
+    val commandsFactory = CommandsFactory(bookService, readingList, console)
+    val commands = Commands(console, commandsFactory)
 
     @Test
     fun `should accept the exit command`() {

@@ -4,11 +4,9 @@ import org.springframework.stereotype.Component
 
 @Component
 class Commands(
-    private val bookService: BookService,
     private val console: Console,
-    private val readingList: ReadingList,
+    private val commandsFactory: CommandsFactory,
 ) {
-
     fun accept(command: String): AppState {
         when {
             isEmpty(command) -> {
@@ -18,30 +16,21 @@ class Commands(
                 return AppState.EXIT
             }
             isList(command) -> {
-                val executor = ListCommandExecutor(readingList, ReadingListPresenter(console))
-                executor.execute()
+                executeList()
             }
             isAdd(command) -> {
-                val indexSupplier = indexSupplier(command)
-
-                val validator: CommandValidator = AddCommandValidator(AddPresenter(console), bookService, indexSupplier)
-                if (validator.isNotValid(command)) {
+                if (isNotValidAdd(command)) {
                     return AppState.CONTINUE
                 }
 
-                val executor = AddCommandExecutor(bookService, readingList, indexSupplier)
-                executor.execute()
+                executeAdd(command)
             }
             isSearch(command) -> {
-                val presenter = SearchBooksPresenter(console)
-                val validator: CommandValidator = SearchCommandValidator(presenter)
-                if (validator.isNotValid(command)) {
+                if (isNotValidSearch(command)) {
                     return AppState.CONTINUE
                 }
 
-                val criteriaSupplier  = criteriaSupplier(command)
-                val executor = SearchCommandExecutor(bookService, presenter, criteriaSupplier)
-                executor.execute()
+                executeSearch(command)
             }
             else -> {
                 printHelp()
@@ -76,6 +65,11 @@ class Commands(
 
     private fun isEmpty(command: String) = command.trim().isEmpty()
 
-    private fun indexSupplier(command: String) = { command.split(":")[1].trim().toInt() }
-    private fun criteriaSupplier(command: String) = { command.split(":")[1].trim() }
+    private fun isNotValidSearch(command: String) = commandsFactory.createSearchCommandValidator(command).isNotValid()
+    private fun executeSearch(command: String) = commandsFactory.createSearchCommandExecutor(command).execute()
+
+    private fun isNotValidAdd(command: String) = commandsFactory.createAddCommandValidator(command).isNotValid()
+    private fun executeAdd(command: String) = commandsFactory.createAddCommandExecutor(command).execute()
+
+    private fun executeList() = commandsFactory.createListCommandExecutor().execute()
 }

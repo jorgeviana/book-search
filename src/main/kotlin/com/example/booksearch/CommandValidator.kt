@@ -1,11 +1,14 @@
 package com.example.booksearch
 
 interface CommandValidator {
-    fun isNotValid(command: String): Boolean
+    fun isNotValid(): Boolean
 }
 
-class SearchCommandValidator(private val presenter: BooksPresenter) : CommandValidator {
-    override fun isNotValid(command: String): Boolean {
+class SearchCommandValidator(
+    private val command: String,
+    private val presenter: BooksPresenter
+    ) : CommandValidator {
+    override fun isNotValid(): Boolean {
         if (!command.contains(":")) {
             presenter.presentError("- invalid search command")
             return true
@@ -22,9 +25,10 @@ class SearchCommandValidator(private val presenter: BooksPresenter) : CommandVal
 class AddCommandValidator(
     private val presenter: BooksPresenter,
     private val bookService: BookService,
+    private val command: String,
     private val indexSupplier: () -> Int,
     ) : CommandValidator {
-    override fun isNotValid(command: String): Boolean {
+    override fun isNotValid(): Boolean {
         if (!command.contains(":")) {
             presenter.presentError("- add command is malformed. Ex: add: 1")
             return true
