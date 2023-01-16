@@ -1,6 +1,10 @@
-package com.example.booksearch
+package com.example.booksearch.command
 
+import com.example.booksearch.TestConsole
 import com.example.booksearch.TestData.Companion.MOBY_DICK
+import com.example.booksearch.presentation.Console
+import com.example.booksearch.services.BookService
+import com.example.booksearch.services.ReadingList
 import org.junit.jupiter.api.Test
 import org.mockito.kotlin.given
 import org.mockito.kotlin.mock

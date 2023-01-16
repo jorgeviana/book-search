@@ -1,7 +1,7 @@
 package slow.tests
 
 import com.example.booksearch.AppRunner
-import com.example.booksearch.BookService
+import com.example.booksearch.services.BookService
 import slow.tests.SmokeTest.Companion.restoreInputStream
 import slow.tests.SmokeTest.Companion.simulatesUserTyping
 import org.assertj.core.api.Assertions.assertThat

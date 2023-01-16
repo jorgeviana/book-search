@@ -1,6 +1,7 @@
 package com.example.booksearch
 
 import com.example.booksearch.AppState.EXIT
+import com.example.booksearch.command.Commands
 import org.springframework.boot.ApplicationArguments
 import org.springframework.boot.ApplicationRunner
 import org.springframework.boot.autoconfigure.SpringBootApplication

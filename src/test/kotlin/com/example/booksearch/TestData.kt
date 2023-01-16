@@ -1,5 +1,7 @@
 package com.example.booksearch
 
+import com.example.booksearch.services.Book
+
 class TestData {
 
     companion object {

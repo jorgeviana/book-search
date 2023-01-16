@@ -1,5 +1,7 @@
-package com.example.booksearch
+package com.example.booksearch.command
 
+import com.example.booksearch.AppState
+import com.example.booksearch.presentation.Console
 import org.springframework.stereotype.Component
 
 @Component

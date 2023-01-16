@@ -1,4 +1,4 @@
-package com.example.booksearch
+package com.example.booksearch.services
 
 import org.springframework.boot.web.client.RestTemplateBuilder
 import org.springframework.http.ResponseEntity

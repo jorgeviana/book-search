@@ -1,4 +1,6 @@
-package com.example.booksearch
+package com.example.booksearch.presentation
+
+import com.example.booksearch.services.Book
 
 abstract class BooksPresenter(private val console: Console) {
     abstract fun present(books: List<Book>)

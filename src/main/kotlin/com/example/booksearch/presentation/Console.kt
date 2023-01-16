@@ -1,4 +1,4 @@
-package com.example.booksearch
+package com.example.booksearch.presentation
 
 import org.springframework.stereotype.Component
 

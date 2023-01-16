@@ -1,4 +1,4 @@
-package com.example.booksearch
+package com.example.booksearch.services
 
 class FakeBookService : BookService {
 

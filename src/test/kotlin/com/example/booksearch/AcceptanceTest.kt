@@ -3,6 +3,11 @@ package com.example.booksearch
 import com.example.booksearch.TestData.Companion.CHARLES_WAVES_BOOK
 import com.example.booksearch.TestData.Companion.MOBY_DICK
 import com.example.booksearch.TestData.Companion.THE_WAVES
+import com.example.booksearch.command.Commands
+import com.example.booksearch.command.CommandsFactory
+import com.example.booksearch.presentation.Console
+import com.example.booksearch.services.FakeBookService
+import com.example.booksearch.services.ReadingList
 import org.junit.jupiter.api.Test
 import org.mockito.kotlin.mock
 

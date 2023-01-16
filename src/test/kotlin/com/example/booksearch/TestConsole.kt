@@ -1,5 +1,6 @@
 package com.example.booksearch
 
+import com.example.booksearch.presentation.Console
 import org.mockito.ArgumentMatchers.contains
 import org.mockito.Mockito
 import org.mockito.kotlin.times

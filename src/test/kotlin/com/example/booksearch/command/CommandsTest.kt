@@ -1,7 +1,12 @@
-package com.example.booksearch
+package com.example.booksearch.command
 
+import com.example.booksearch.AppState
+import com.example.booksearch.TestConsole
 import com.example.booksearch.TestData.Companion.CHARLES_WAVES_BOOK
 import com.example.booksearch.TestData.Companion.THE_WAVES
+import com.example.booksearch.presentation.Console
+import com.example.booksearch.services.BookService
+import com.example.booksearch.services.ReadingList
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.mockito.kotlin.given

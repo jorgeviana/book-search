@@ -1,4 +1,7 @@
-package com.example.booksearch
+package com.example.booksearch.command
+
+import com.example.booksearch.presentation.BooksPresenter
+import com.example.booksearch.services.BookService
 
 interface CommandValidator {
     fun isNotValid(): Boolean

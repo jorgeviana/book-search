@@ -1,5 +1,11 @@
-package com.example.booksearch
+package com.example.booksearch.command
 
+import com.example.booksearch.presentation.AddPresenter
+import com.example.booksearch.presentation.Console
+import com.example.booksearch.presentation.ReadingListPresenter
+import com.example.booksearch.presentation.SearchBooksPresenter
+import com.example.booksearch.services.BookService
+import com.example.booksearch.services.ReadingList
 import org.springframework.stereotype.Component
 
 @Component

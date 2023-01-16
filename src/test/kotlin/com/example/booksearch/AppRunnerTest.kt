@@ -1,5 +1,6 @@
 package com.example.booksearch
 
+import com.example.booksearch.command.Commands
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.mockito.kotlin.*

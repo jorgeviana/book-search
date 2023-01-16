@@ -1,4 +1,4 @@
-package com.example.booksearch
+package com.example.booksearch.services
 
 import com.example.booksearch.TestData.Companion.BOOK_1
 import com.example.booksearch.TestData.Companion.BOOK_2
