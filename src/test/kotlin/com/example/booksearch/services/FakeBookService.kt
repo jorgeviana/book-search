@@ -1,5 +1,7 @@
 package com.example.booksearch.services
 
+import com.example.booksearch.services.BookService.Companion.MAX_SEARCH_RESULT
+
 class FakeBookService : BookService {
 
     private val books = mutableListOf<Book>()
