@@ -22,13 +22,14 @@ class Commands(
                 executor.execute()
             }
             isAdd(command) -> {
-                val validator: CommandValidator = AddCommandValidator(console)
+                val indexSupplier: () -> Int = { command.split(":")[1].trim().toInt() }
+
+                val validator: CommandValidator = AddCommandValidator(console, bookService, indexSupplier)
                 if (validator.isNotValid(command)) {
                     return AppState.CONTINUE
                 }
 
-                val index = command.split(":")[1].trim().toInt()
-                val executor = AddCommandExecutor(bookService, console, readingList, index)
+                val executor = AddCommandExecutor(bookService, readingList, indexSupplier)
                 executor.execute()
             }
             isSearch(command) -> {
