@@ -1,6 +1,7 @@
 package com.example.booksearch.command
 
 import com.example.booksearch.presentation.BooksPresenter
+import com.example.booksearch.presentation.ReadingListPresenter
 import com.example.booksearch.services.BookService
 import com.example.booksearch.services.ReadingList
 
@@ -33,7 +34,7 @@ class AddCommandExecutor(
 
 class ListCommandExecutor(
     private val readingList: ReadingList,
-    private val readingListPresenter: BooksPresenter,
+    private val readingListPresenter: ReadingListPresenter,
 ) : CommandExecutor {
     override fun execute() {
         val booksList = readingList.get()
