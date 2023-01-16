@@ -7,10 +7,10 @@ interface CommandExecutor {
 class SearchCommandExecutor(
     private val bookService: BookService,
     private val searchBooksPresenter: BooksPresenter,
-    private val criteria: String,
+    private val criteriaSupplier: () -> String,
 ) : CommandExecutor {
     override fun execute() {
-        val books = bookService.search(criteria)
+        val books = bookService.search(criteriaSupplier())
         searchBooksPresenter.present(books)
     }
 }

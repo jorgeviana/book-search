@@ -22,7 +22,7 @@ class Commands(
                 executor.execute()
             }
             isAdd(command) -> {
-                val indexSupplier: () -> Int = { command.split(":")[1].trim().toInt() }
+                val indexSupplier = indexSupplier(command)
 
                 val validator: CommandValidator = AddCommandValidator(console, bookService, indexSupplier)
                 if (validator.isNotValid(command)) {
@@ -38,8 +38,8 @@ class Commands(
                     return AppState.CONTINUE
                 }
 
-                val criteria = command.split(":")[1].trim()
-                val executor = SearchCommandExecutor(bookService, SearchBooksPresenter(console), criteria)
+                val criteriaSupplier  = criteriaSupplier(command)
+                val executor = SearchCommandExecutor(bookService, SearchBooksPresenter(console), criteriaSupplier)
                 executor.execute()
             }
             else -> {
@@ -74,4 +74,7 @@ class Commands(
     private fun isExitCommand(command: String) = command.trim().lowercase() == "exit"
 
     private fun isEmpty(command: String) = command.trim().isEmpty()
+
+    private fun indexSupplier(command: String) = { command.split(":")[1].trim().toInt() }
+    private fun criteriaSupplier(command: String) = { command.split(":")[1].trim() }
 }
