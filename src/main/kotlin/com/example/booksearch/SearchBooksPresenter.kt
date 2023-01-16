@@ -1,12 +1,9 @@
 package com.example.booksearch
 
-interface BooksPresenter {
-    fun present(books: List<Book>)
-}
+abstract class BooksPresenter(private val console: Console) {
+    abstract fun present(books: List<Book>)
 
-class SearchBooksPresenter(private val console: Console) : BooksPresenter {
-
-    override fun present(books: List<Book>) {
+    fun defaultPresentation(books: List<Book>) {
         books.forEachIndexed { index, book ->
             if (index > 0) {
                 console.printLine("")
@@ -19,7 +16,14 @@ class SearchBooksPresenter(private val console: Console) : BooksPresenter {
     }
 }
 
-class ReadingListPresenter(private val console: Console) : BooksPresenter {
+class SearchBooksPresenter(private val console: Console) : BooksPresenter(console) {
+
+    override fun present(books: List<Book>) {
+        defaultPresentation(books)
+    }
+}
+
+class ReadingListPresenter(private val console: Console) : BooksPresenter(console) {
 
     override fun present(books: List<Book>) {
         if (books.isEmpty()) {
@@ -27,14 +31,6 @@ class ReadingListPresenter(private val console: Console) : BooksPresenter {
             return
         }
         console.printLine("The reading list is:")
-        books.forEachIndexed { index, book ->
-            if (index > 0) {
-                console.printLine("")
-            }
-            console.printLine("Book #${index + 1}")
-            console.printLine("Tittle: ${book.tittle}")
-            console.printLine("Author: ${book.author}")
-            console.printLine("Publisher: ${book.publishingCompany}")
-        }
+        defaultPresentation(books)
     }
 }
