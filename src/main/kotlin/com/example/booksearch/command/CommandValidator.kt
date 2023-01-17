@@ -38,12 +38,12 @@ class AddCommandValidator(
             return true
         }
 
-        if (nullableIndexSupplier() == null) {
+        val index = nullableIndexSupplier()
+        if (index == null) {
             presenter.presentError("- add command is malformed. Ex: add: 1")
             return true
         }
 
-        val index = nullableIndexSupplier()!!
         if (index < 1) {
             presenter.presentError("- add command is malformed. Number of the book should be greater or equal to 1")
             return true
