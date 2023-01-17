@@ -24,14 +24,12 @@ class Commands(
                 if (isNotValidAdd(command)) {
                     return AppState.CONTINUE
                 }
-
                 executeAdd(command)
             }
             isSearch(command) -> {
                 if (isNotValidSearch(command)) {
                     return AppState.CONTINUE
                 }
-
                 executeSearch(command)
             }
             else -> {
@@ -68,9 +66,11 @@ class Commands(
     private fun isEmpty(command: String) = command.trim().isEmpty()
 
     private fun isNotValidSearch(command: String) = commandsFactory.createSearchCommandValidator(command).isNotValid()
+
     private fun executeSearch(command: String) = commandsFactory.createSearchCommandExecutor(command).execute()
 
     private fun isNotValidAdd(command: String) = commandsFactory.createAddCommandValidator(command).isNotValid()
+
     private fun executeAdd(command: String) = commandsFactory.createAddCommandExecutor(command).execute()
 
     private fun executeList() = commandsFactory.createListCommandExecutor().execute()
