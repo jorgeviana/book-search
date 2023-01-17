@@ -9,14 +9,15 @@ interface CommandValidator {
 
 class SearchCommandValidator(
     private val command: String,
-    private val presenter: BooksPresenter
+    private val presenter: BooksPresenter,
+    private val criteriaSupplier: () -> String,
     ) : CommandValidator {
     override fun isNotValid(): Boolean {
         if (!command.contains(":")) {
             presenter.presentError("- invalid search command")
             return true
         }
-        val criteria = command.split(":")[1].trim()
+        val criteria = criteriaSupplier()
         if (criteria.isEmpty()) {
             presenter.presentError("- invalid search command")
             return true
@@ -29,19 +30,20 @@ class AddCommandValidator(
     private val presenter: BooksPresenter,
     private val bookService: BookService,
     private val command: String,
-    private val indexSupplier: () -> Int,
+    private val nullableIndexSupplier: () -> Int?,
     ) : CommandValidator {
     override fun isNotValid(): Boolean {
         if (!command.contains(":")) {
             presenter.presentError("- add command is malformed. Ex: add: 1")
             return true
         }
-        if (command.split(":")[1].trim().toIntOrNull() == null) {
+
+        if (nullableIndexSupplier() == null) {
             presenter.presentError("- add command is malformed. Ex: add: 1")
             return true
         }
 
-        val index = indexSupplier()
+        val index = nullableIndexSupplier()!!
         if (index < 1) {
             presenter.presentError("- add command is malformed. Number of the book should be greater or equal to 1")
             return true

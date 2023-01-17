@@ -13,11 +13,13 @@ class CommandsFactory(
     private val readingList: ReadingList,
     private val console: Console,
 ) {
-    fun indexSupplier(command: String) = { command.split(":")[1].trim().toInt() }
-    fun criteriaSupplier(command: String) = { command.split(":")[1].trim() }
+    fun secondArgument(command: String) = command.split(":")[1].trim()
+    fun indexSupplier(command: String) = { secondArgument(command).toInt() }
+    fun nullableIndexSupplier(command: String) = { secondArgument(command).toIntOrNull() }
+    fun criteriaSupplier(command: String) = { secondArgument(command) }
 
     fun createAddCommandValidator(command: String) =
-        AddCommandValidator(BooksPresenter(console), bookService, command, indexSupplier(command))
+        AddCommandValidator(BooksPresenter(console), bookService, command, nullableIndexSupplier(command))
 
     fun createAddCommandExecutor(command: String) =
         AddCommandExecutor(bookService, readingList, indexSupplier(command))
@@ -25,7 +27,7 @@ class CommandsFactory(
     fun createListCommandExecutor() = ListCommandExecutor(readingList, ReadingListPresenter(console))
 
     fun createSearchCommandValidator(command: String) =
-        SearchCommandValidator(command, BooksPresenter(console))
+        SearchCommandValidator(command, BooksPresenter(console), criteriaSupplier(command))
 
     fun createSearchCommandExecutor(command: String) =
         SearchCommandExecutor(bookService, BooksPresenter(console), criteriaSupplier(command))
